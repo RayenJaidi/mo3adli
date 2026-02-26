@@ -6,64 +6,222 @@
     <title>Moyenne Semestre</title>
     <script src="function.js"></script>
     <style>
-body{
-font-family: Arial;
-background:#f4f6f9;
-padding:20px;
+/* ───────────── BODY ───────────── */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(135deg, #667eea, #764ba2, #6dd5fa);
+    background-size: 300% 300%;
+    animation: gradientFlow 15s ease infinite;
+    overflow-x: hidden;
+    position: relative;
+    padding: 40px 15px;
+    box-sizing: border-box;
 }
 
-h1{
-text-align:center;
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-table{
-width:100%;
-border-collapse:collapse;
-margin-bottom:30px;
-background:white;
+body::before, body::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 0;
 }
 
-th,td{
-border:1px solid #ccc;
-padding:8px;
-text-align:center;
+body::before {
+    width: 450px; height: 450px;
+    background: rgba(255,255,255,0.18);
+    top: -120px; left: -120px;
 }
 
-th{
-background:#c30606;
-color:white;
+body::after {
+    width: 350px; height: 350px;
+    background: rgba(255,255,255,0.12);
+    bottom: -100px; right: -100px;
 }
 
-.module{
-background:#dfefff;
-font-weight:bold;
+/* ───────────── TITRE ───────────── */
+h1 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    padding: 0 15px;
 }
 
-input{
-width:60px;
-padding:4px;
-border-radius: 4px;
+/* ───────────── WRAPPER TABLEAU ───────────── */
+.table-wrapper {
+    width: 95%;
+    max-width: 1300px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 2;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.25),
+                inset 0 0 0 1px rgba(255,255,255,0.5);
+    margin: 0 auto;
+    display: block;
 }
 
-button{
-padding:10px 20px;
-font-size:16px;
-background:#2c7be5;
-color:white;
-border:none;
-cursor:pointer;
+/* ───────────── TABLE ───────────── */
+table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.97);
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-.result{
-font-size:22px;
-font-weight:bold;
-text-align:center;
-margin-top:20px;
+th {
+    background: linear-gradient(90deg, #1e3a8a, #2563eb);
+    color: white;
+    padding: 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid #1e40af;
 }
-</style>
+
+td {
+    padding: 13px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    font-size: 14px;
+    color: #1f2937;
+    background: white;
+}
+
+tr:nth-child(even):not(:first-child) td { background: #f1f5ff; }
+tr:hover td { background: #e0ebff; transition: 0.25s ease; }
+
+.module td {
+    background: #e8edff;
+    font-weight: 600;
+    border-top: 3px solid #3b82f6;
+}
+
+td:nth-child(7), td:nth-child(8) { font-weight: bold; color: #1d4ed8; }
+td:nth-child(9) { font-weight: bold; font-size: 16px; color: #c2410c; }
+td:nth-child(10) { color: #16a34a; font-weight: bold; }
+
+/* ───────────── INPUTS ───────────── */
+input {
+    width: 65px;
+    padding: 7px;
+    border-radius: 10px;
+    border: 1.5px solid #cbd5e1;
+    background: #f9fbff;
+    text-align: center;
+    font-size: 13px;
+    transition: all 0.25s ease;
+}
+
+input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.2);
+    outline: none;
+    background: white;
+}
+
+/* ───────────── BOUTON ───────────── */
+button {
+    margin-top: 35px;
+    padding: 15px 55px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    box-shadow: 0 15px 35px rgba(34,197,94,0.4);
+    transition: all 0.3s ease;
+    z-index: 2;
+    position: relative;
+}
+
+button:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(34,197,94,0.5); }
+button:active { transform: translateY(0); }
+
+/* ───────────── RESULTAT ───────────── */
+.result {
+    margin-top: 35px;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 22px;
+    border-radius: 18px;
+    transition: 0.4s ease;
+    transform: scale(0.85);
+    opacity: 0;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+}
+
+.result.show { transform: scale(1); opacity: 1; }
+
+.success {
+    background: linear-gradient(90deg, #dcfce7, #bbf7d0);
+    color: #166534;
+    box-shadow: 0 15px 40px rgba(22,163,74,0.3);
+}
+
+.fail {
+    background: linear-gradient(90deg, #fee2e2, #fecaca);
+    color: #991b1b;
+    box-shadow: 0 15px 40px rgba(220,38,38,0.3);
+}
+
+/* ───────────── RESPONSIVE TABLETTE ───────────── */
+@media (max-width: 768px) {
+    h1 { font-size: 20px; margin-bottom: 15px; }
+    th { padding: 10px 6px; font-size: 10px; letter-spacing: 0; }
+    td { padding: 8px 5px; font-size: 12px; }
+    td:nth-child(9) { font-size: 13px; }
+    input { width: 50px; padding: 5px; font-size: 12px; }
+    button { padding: 12px 35px; font-size: 15px; margin-top: 20px; }
+    .result { font-size: 20px; padding: 16px; margin: 20px 15px; }
+}
+
+/* ───────────── RESPONSIVE MOBILE ───────────── */
+@media (max-width: 480px) {
+    h1 { font-size: 16px; margin-bottom: 12px; }
+    th { padding: 7px 3px; font-size: 8px; }
+    td { padding: 6px 3px; font-size: 10px; }
+    td:nth-child(9) { font-size: 11px; }
+    input { width: 38px; padding: 4px; font-size: 10px; border-radius: 6px; }
+    button { padding: 10px 25px; font-size: 14px; }
+    .result { font-size: 16px; padding: 13px; margin: 15px 10px; }
+}
+
+.footer-name:hover {
+    text-shadow: 
+        0 2px 12px rgba(255,255,255,0.6),
+        0 0 15px rgba(255,255,255,0.4),
+        0 0 25px rgba(255,255,255,0.3);
+    transform: scale(1.05);
+}
+    </style>
 </head>
 <body>
     <h1>Calcul Moyenne Semestre 1</h1>
+
+    <div class="table-wrapper">
     <table>
         <tr>
             <th>Module</th>
@@ -73,14 +231,15 @@ margin-top:20px;
             <th>DS</th>
             <th>Examen</th>
             <th>Moyenne</th>
-            <th>credit</th>
+            <th>Crédit</th>
             <th>Moyenne Module</th>
-            <th>credit module</th>
+            <th>Crédit Module</th>
         </tr>
 
+        <!-- ── CPOO ── -->
         <tr class="module">
             <td rowspan="2">CPOO</td>
-            <td>SI</td>
+            <td>Conception UML</td>
             <td>1.5</td>
             <td><input type="number" id="si_td" min="0" max="20"></td>
             <td><input type="number" id="si_ds" min="0" max="20"></td>
@@ -88,9 +247,8 @@ margin-top:20px;
             <td id="m_si">0</td>
             <td id="cr_si">0</td>
             <td rowspan="2" id="m_cpoo">0</td>
-            <td rowspan="2">0</td>
+            <td rowspan="2" id="cr_cpoo">0</td>
         </tr>
-
         <tr class="module">
             <td>Java</td>
             <td>2</td>
@@ -101,6 +259,7 @@ margin-top:20px;
             <td id="cr_java">0</td>
         </tr>
 
+        <!-- ── Probabilité ── -->
         <tr class="module">
             <td>Probabilité</td>
             <td>Probabilité et Statistique</td>
@@ -109,11 +268,12 @@ margin-top:20px;
             <td><input type="number" id="proba_ds" min="0" max="20"></td>
             <td><input type="number" id="proba_ex" min="0" max="20"></td>
             <td id="m_proba">0</td>
-            <td>0</td>
+            <td id="cr_proba">0</td>
             <td id="m_probabilité">0</td>
-            <td>0</td>
+            <td id="cr_probabilite">0</td>
         </tr>
 
+        <!-- ── Automate ── -->
         <tr class="module">
             <td rowspan="2">Automate</td>
             <td>TLA</td>
@@ -122,11 +282,10 @@ margin-top:20px;
             <td><input type="number" id="tla_ds" min="0" max="20"></td>
             <td><input type="number" id="tla_ex" min="0" max="20"></td>
             <td id="m_tla">0</td>
-            <td>0</td>
+            <td id="cr_tla">0</td>
             <td rowspan="2" id="m_automate">0</td>
-            <td rowspan="2">0</td>
+            <td rowspan="2" id="cr_automate">0</td>
         </tr>
-
         <tr class="module">
             <td>Graphes</td>
             <td>1</td>
@@ -134,9 +293,10 @@ margin-top:20px;
             <td><input type="number" id="graph_ds" min="0" max="20"></td>
             <td><input type="number" id="graph_ex" min="0" max="20"></td>
             <td id="m_graphe">0</td>
-            <td>0</td>
+            <td id="cr_graph">0</td>
         </tr>
 
+        <!-- ── Base de données ── -->
         <tr class="module">
             <td rowspan="2">Base de données</td>
             <td>Ingénierie BD</td>
@@ -145,11 +305,10 @@ margin-top:20px;
             <td><input type="number" id="bd_ds" min="0" max="20"></td>
             <td><input type="number" id="bd_ex" min="0" max="20"></td>
             <td id="m_base">0</td>
-            <td>0</td>
+            <td id="cr_bd">0</td>
             <td rowspan="2" id="m_basededonne">0</td>
-            <td rowspan="2">0</td>
+            <td rowspan="2" id="cr_basededonne">0</td>
         </tr>
-
         <tr class="module">
             <td>Réseaux</td>
             <td>1</td>
@@ -157,10 +316,10 @@ margin-top:20px;
             <td><input type="number" id="res_ds" min="0" max="20"></td>
             <td><input type="number" id="res_ex" min="0" max="20"></td>
             <td id="m_reseau">0</td>
-            <td>0</td>
+            <td id="cr_reseau">0</td>
         </tr>
 
-
+        <!-- ── Langue et culture ── -->
         <tr class="module">
             <td rowspan="2">Langue et culture</td>
             <td>Anglais</td>
@@ -169,11 +328,10 @@ margin-top:20px;
             <td><input type="number" id="ang_ds" min="0" max="20"></td>
             <td><input type="number" id="ang_ex" min="0" max="20"></td>
             <td id="m_ang">0</td>
-            <td>0</td>
+            <td id="cr_ang">0</td>
             <td rowspan="2" id="m_langue">0</td>
-            <td rowspan="2">0</td>
+            <td rowspan="2" id="cr_langue">0</td>
         </tr>
-
         <tr class="module">
             <td>Gestion</td>
             <td>1</td>
@@ -181,10 +339,10 @@ margin-top:20px;
             <td><input type="number" id="gest_ds" min="0" max="20"></td>
             <td><input type="number" id="gest_ex" min="0" max="20"></td>
             <td id="m_gestion">0</td>
-            <td>0</td>
+            <td id="cr_gestion">0</td>
         </tr>
 
-
+        <!-- ── UE Optionnelle ── -->
         <tr class="module">
             <td rowspan="2">UE Optionnelle</td>
             <td>Entreprise System</td>
@@ -193,11 +351,10 @@ margin-top:20px;
             <td><input type="number" id="ent_ds" min="0" max="20"></td>
             <td><input type="number" id="ent_ex" min="0" max="20"></td>
             <td id="m_ent">0</td>
-            <td>0</td>
+            <td id="cr_ent">0</td>
             <td rowspan="2" id="m_uo">0</td>
-            <td rowspan="2">0</td>
+            <td rowspan="2" id="cr_uo">0</td>
         </tr>
-
         <tr class="module">
             <td>System Modeling</td>
             <td>1.5</td>
@@ -205,17 +362,41 @@ margin-top:20px;
             <td><input type="number" id="sys_ds" min="0" max="20"></td>
             <td><input type="number" id="sys_ex" min="0" max="20"></td>
             <td id="m_sys">0</td>
-            <td>0</td>
+            <td id="cr_sys">0</td>
         </tr>
 
     </table>
-
-
-    
+    </div>
 
     <div style="text-align:center;">
         <button onclick="calculer()">Calculer la moyenne</button>
     </div>
     <div class="result" id="moyenne"></div>
+
+  
+<p style="
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    margin: 40px 0 20px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.25);
+">
+    ©  Made by 
+    <strong class="footer-name" style="
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-shadow: 
+            0 2px 12px rgba(255,255,255,0.4), 
+            0 0 8px rgba(255,255,255,0.2);
+        transition: 0.3s ease;
+        cursor: pointer;
+    ">
+        Jaidi Rayen
+    </strong>
+</p>
 </body>
 </html>
