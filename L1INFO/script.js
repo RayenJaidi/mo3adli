@@ -34,6 +34,8 @@ function creditModule(moyModule, creditsTotal, creditsMatieres) {
 
 function calculer() {
 
+    if (!validerSaisies()) return;
+
     // ── Logique et multimédia ──
     let logique = calcMatiere(
         document.getElementById("logique_td").value,
@@ -194,4 +196,24 @@ function calculer() {
     resultDiv.innerHTML = `Moyenne Générale : ${moyenne.toFixed(2)} &nbsp;|&nbsp; Crédits : ${creditTotal} / ${creditMax}`;
 
     setTimeout(() => resultDiv.classList.add("show"), 100);
+}
+
+function validerSaisies() {
+    const inputs = document.querySelectorAll("input[type='number']");
+    for (let input of inputs) {
+        const val = input.value.trim();
+        if (val === "") continue;
+        const num = parseFloat(String(val).replace(",", "."));
+        if (isNaN(num) || num < 0 || num > 20) {
+            input.style.border = "2px solid #dc2626";
+            input.style.background = "#fee2e2";
+            input.focus();
+            alert(`Note invalide : "${val}"\nLa note doit être entre 0 et 20.`);
+            return false;
+        } else {
+            input.style.border = "1.5px solid #cbd5e1";
+            input.style.background = "#f9fbff";
+        }
+    }
+    return true;
 }
