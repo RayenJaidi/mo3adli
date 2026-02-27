@@ -33,17 +33,22 @@ function validerSaisies() {
         if (val === "") continue;
         const num = parseFloat(String(val).replace(",", "."));
         if (isNaN(num) || num < 0 || num > 20) {
-            input.classList.add("invalid");
-            input.classList.remove("valid");
+            input.style.border = "2px solid #dc2626";
+            input.style.background = "#fee2e2";
             input.focus();
-            alert(`Note invalide : "${val}"\nLa note doit être entre 0 et 20.`);
+            alert("Note invalide : \"" + val + "\"\nLa note doit être entre 0 et 20.");
             return false;
         } else {
-            input.classList.add("valid");
-            input.classList.remove("invalid");
+            input.style.border = "1.5px solid #16a34a";
+            input.style.background = "#f0fdf4";
         }
     }
     return true;
+}
+
+function getVal(id) {
+    const el = document.getElementById(id);
+    return el ? el.value : "0";
 }
 
 function calculer() {
@@ -52,100 +57,100 @@ function calculer() {
 
     // ── CPOO ──
     let si = calcMatiere(
-        document.getElementById("si_td").value,
-        document.getElementById("si_ds").value,
-        document.getElementById("si_ex").value
+        getVal("si_td"),
+        getVal("si_ds"),
+        getVal("si_ex")
     );
     let java = calcMatiere(
-        document.getElementById("java_ds").value,
-        document.getElementById("java_td").value,
-        document.getElementById("java_ex").value
+        getVal("java_ds"),
+        getVal("java_td"),
+        getVal("java_ex")
     );
     let moyCoop = (si * 1.5 + java * 2) / 3.5;
 
     let cr_si         = creditMatiere(si, 1.5);
     let cr_java       = creditMatiere(java, 2);
-    let cr_cpoo_total = getCredit(1.5) + getCredit(2); // 7
+    let cr_cpoo_total = getCredit(1.5) + getCredit(2);
     let cr_cpoo       = creditModule(moyCoop, cr_cpoo_total, cr_si + cr_java);
 
     // ── Probabilité ──
     let proba = calcMatiere(
-        document.getElementById("proba_td").value,
-        document.getElementById("proba_ds").value,
-        document.getElementById("proba_ex").value
+        getVal("proba_td"),
+        getVal("proba_ds"),
+        getVal("proba_ex")
     );
     let moyProba = proba;
 
     let cr_proba       = creditMatiere(proba, 2);
-    let cr_proba_total = getCredit(2); // 4
+    let cr_proba_total = getCredit(2);
     let cr_probabilite = creditModule(moyProba, cr_proba_total, cr_proba);
 
     // ── Automate ──
     let tla = calcMatiere(
-        document.getElementById("tla_td").value,
-        document.getElementById("tla_ds").value,
-        document.getElementById("tla_ex").value
+        getVal("tla_td"),
+        getVal("tla_ds"),
+        getVal("tla_ex")
     );
     let graph = calcMatiere(
-        document.getElementById("graph_td").value,
-        document.getElementById("graph_ds").value,
-        document.getElementById("graph_ex").value
+        getVal("graph_td"),
+        getVal("graph_ds"),
+        getVal("graph_ex")
     );
     let moyAutomate = (tla + graph) / 2;
 
     let cr_tla        = creditMatiere(tla, 1);
     let cr_graph      = creditMatiere(graph, 1);
-    let cr_auto_total = getCredit(1) + getCredit(1); // 4
+    let cr_auto_total = getCredit(1) + getCredit(1);
     let cr_automate   = creditModule(moyAutomate, cr_auto_total, cr_tla + cr_graph);
 
     // ── Base de données ──
     let bd = calcMatiere(
-        document.getElementById("bd_ds").value,
-        document.getElementById("bd_td").value,
-        document.getElementById("bd_ex").value
+        getVal("bd_ds"),
+        getVal("bd_td"),
+        getVal("bd_ex")
     );
     let reseau = calcMatiere(
-        document.getElementById("res_ds").value,
-        document.getElementById("res_td").value,
-        document.getElementById("res_ex").value
+        getVal("res_ds"),
+        getVal("res_td"),
+        getVal("res_ex")
     );
     let moyBase = (reseau + bd * 1.5) / 2.5;
 
     let cr_bd         = creditMatiere(bd, 1.5);
     let cr_reseau     = creditMatiere(reseau, 1);
-    let cr_base_total = getCredit(1.5) + getCredit(1); // 5
+    let cr_base_total = getCredit(1.5) + getCredit(1);
     let cr_base       = creditModule(moyBase, cr_base_total, cr_bd + cr_reseau);
 
     // ── Langue et culture ──
-    let ang     = parseFloat(String(document.getElementById("ang_ds").value).replace(",", ".")) * 0.2
-                + parseFloat(String(document.getElementById("ang_ex").value).replace(",", ".")) * 0.8;
-    let gestion = parseFloat(String(document.getElementById("gest_ds").value).replace(",", ".")) * 0.2
-                + parseFloat(String(document.getElementById("gest_ex").value).replace(",", ".")) * 0.8;
+    let ang     = parseFloat(String(getVal("ang_ds")).replace(",", ".")) * 0.2
+                + parseFloat(String(getVal("ang_ex")).replace(",", ".")) * 0.8;
+    let gestion = parseFloat(String(getVal("gest_ds")).replace(",", ".")) * 0.2
+                + parseFloat(String(getVal("gest_ex")).replace(",", ".")) * 0.8;
     ang     = ang     || 0;
     gestion = gestion || 0;
     let moyLangue = (ang + gestion) / 2;
 
     let cr_ang          = creditMatiere(ang, 1);
     let cr_gestion      = creditMatiere(gestion, 1);
-    let cr_langue_total = getCredit(1) + getCredit(1); // 4
+    let cr_langue_total = getCredit(1) + getCredit(1);
     let cr_langue       = creditModule(moyLangue, cr_langue_total, cr_ang + cr_gestion);
 
     // ── UE Optionnelle ──
     let ent = calcMatiere(
-        document.getElementById("ent_ds").value,
-        document.getElementById("ent_td").value,
-        document.getElementById("ent_ex").value
+        getVal("ent_ds"),
+        getVal("ent_td"),
+        getVal("ent_ex")
     );
     let sys = calcMatiere(
-        document.getElementById("sys_ds").value,
-        document.getElementById("sys_td").value,
-        document.getElementById("sys_ex").value
+        getVal("sys_ds"),
+        getVal("sys_td"),
+        getVal("sys_ex")
     );
     let moyUO = (ent * 1.5 + sys * 1.5) / 3;
 
     let cr_ent      = creditMatiere(ent, 1.5);
     let cr_sys      = creditMatiere(sys, 1.5);
-    let cr_uo_total = getCredit(1.5) + getCredit(1.5); // 6
+    let cr_uo_total = getCredit(1.5) + getCredit(1.5);
     let cr_uo       = creditModule(moyUO, cr_uo_total, cr_ent + cr_sys);
 
     // ── Moyenne générale ──
@@ -155,9 +160,7 @@ function calculer() {
     let creditTotal = cr_cpoo + cr_probabilite + cr_automate + cr_base + cr_langue + cr_uo;
     let creditMax   = cr_cpoo_total + cr_proba_total + cr_auto_total + cr_base_total + cr_langue_total + cr_uo_total;
 
-    // ════════════════════════════════
     // AFFICHAGE MOYENNES MATIÈRES
-    // ════════════════════════════════
     document.getElementById("m_si").innerHTML      = si.toFixed(2);
     document.getElementById("m_java").innerHTML    = java.toFixed(2);
     document.getElementById("m_proba").innerHTML   = proba.toFixed(2);
@@ -170,9 +173,7 @@ function calculer() {
     document.getElementById("m_ent").innerHTML     = ent.toFixed(2);
     document.getElementById("m_sys").innerHTML     = sys.toFixed(2);
 
-    // ════════════════════════════════
     // AFFICHAGE CRÉDITS MATIÈRES
-    // ════════════════════════════════
     document.getElementById("cr_si").innerHTML      = cr_si;
     document.getElementById("cr_java").innerHTML    = cr_java;
     document.getElementById("cr_proba").innerHTML   = cr_proba;
@@ -185,9 +186,7 @@ function calculer() {
     document.getElementById("cr_ent").innerHTML     = cr_ent;
     document.getElementById("cr_sys").innerHTML     = cr_sys;
 
-    // ════════════════════════════════
     // AFFICHAGE MOYENNES MODULES
-    // ════════════════════════════════
     document.getElementById("m_cpoo").innerHTML        = moyCoop.toFixed(2);
     document.getElementById("m_probabilité").innerHTML = moyProba.toFixed(2);
     document.getElementById("m_automate").innerHTML    = moyAutomate.toFixed(2);
@@ -195,9 +194,7 @@ function calculer() {
     document.getElementById("m_langue").innerHTML      = moyLangue.toFixed(2);
     document.getElementById("m_uo").innerHTML          = moyUO.toFixed(2);
 
-    // ════════════════════════════════
     // AFFICHAGE CRÉDITS MODULES
-    // ════════════════════════════════
     document.getElementById("cr_cpoo").innerHTML        = cr_cpoo + " / " + cr_cpoo_total;
     document.getElementById("cr_probabilite").innerHTML = cr_probabilite + " / " + cr_proba_total;
     document.getElementById("cr_automate").innerHTML    = cr_automate + " / " + cr_auto_total;
@@ -205,9 +202,7 @@ function calculer() {
     document.getElementById("cr_langue").innerHTML      = cr_langue + " / " + cr_langue_total;
     document.getElementById("cr_uo").innerHTML          = cr_uo + " / " + cr_uo_total;
 
-    // ════════════════════════════════
     // COLORATION MOYENNES
-    // ════════════════════════════════
     const idsMoyennes = [
         "m_si", "m_java", "m_proba", "m_tla", "m_graphe",
         "m_base", "m_reseau", "m_ang", "m_gestion", "m_ent", "m_sys",
@@ -226,13 +221,10 @@ function calculer() {
     ];
     creditsModules.forEach(c => colorerElement(c.id, c.val, c.max));
 
-    // ════════════════════════════════
     // RÉSULTAT FINAL
-    // ════════════════════════════════
     let resultDiv = document.getElementById("moyenne");
     resultDiv.classList.remove("success", "fail", "show");
     resultDiv.classList.add(moyenne >= 10 ? "success" : "fail");
     resultDiv.innerHTML = `Moyenne Générale : ${moyenne.toFixed(2)} &nbsp;|&nbsp; Crédits : ${creditTotal} / ${creditMax}`;
-
     setTimeout(() => resultDiv.classList.add("show"), 100);
 }
