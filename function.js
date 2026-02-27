@@ -1,7 +1,7 @@
 function calcMatiere(td, ds, ex) {
-    td = parseFloat(td) || 0;
-    ds = parseFloat(ds) || 0;
-    ex = parseFloat(ex) || 0;
+    td = parseFloat(String(td).replace(",", ".")) || 0;
+    ds = parseFloat(String(ds).replace(",", ".")) || 0;
+    ex = parseFloat(String(ex).replace(",", ".")) || 0;
     return 0.1 * td + 0.2 * ds + 0.7 * ex;
 }
 
@@ -26,18 +26,40 @@ function creditModule(moyModule, creditsTotal, creditsMatieres) {
     return moyModule >= 10 ? creditsTotal : creditsMatieres;
 }
 
+function validerSaisies() {
+    const inputs = document.querySelectorAll("input[type='number']");
+    for (let input of inputs) {
+        const val = input.value.trim();
+        if (val === "") continue;
+        const num = parseFloat(String(val).replace(",", "."));
+        if (isNaN(num) || num < 0 || num > 20) {
+            input.classList.add("invalid");
+            input.classList.remove("valid");
+            input.focus();
+            alert(`Note invalide : "${val}"\nLa note doit être entre 0 et 20.`);
+            return false;
+        } else {
+            input.classList.add("valid");
+            input.classList.remove("invalid");
+        }
+    }
+    return true;
+}
+
 function calculer() {
+
+    if (!validerSaisies()) return;
 
     // ── CPOO ──
     let si = calcMatiere(
-        document.getElementById("si_td").value,   
-        document.getElementById("si_ds").value,   
-        document.getElementById("si_ex").value   
+        document.getElementById("si_td").value,
+        document.getElementById("si_ds").value,
+        document.getElementById("si_ex").value
     );
     let java = calcMatiere(
-        document.getElementById("java_ds").value, 
-        document.getElementById("java_td").value, 
-        document.getElementById("java_ex").value  
+        document.getElementById("java_ds").value,
+        document.getElementById("java_td").value,
+        document.getElementById("java_ex").value
     );
     let moyCoop = (si * 1.5 + java * 2) / 3.5;
 
@@ -65,8 +87,8 @@ function calculer() {
         document.getElementById("tla_ex").value
     );
     let graph = calcMatiere(
-        document.getElementById("graph_td").value, 
-        document.getElementById("graph_ds").value, 
+        document.getElementById("graph_td").value,
+        document.getElementById("graph_ds").value,
         document.getElementById("graph_ex").value
     );
     let moyAutomate = (tla + graph) / 2;
@@ -78,13 +100,13 @@ function calculer() {
 
     // ── Base de données ──
     let bd = calcMatiere(
-        document.getElementById("bd_ds").value,   
-        document.getElementById("bd_td").value,    
+        document.getElementById("bd_ds").value,
+        document.getElementById("bd_td").value,
         document.getElementById("bd_ex").value
     );
     let reseau = calcMatiere(
-        document.getElementById("res_ds").value,  
-        document.getElementById("res_td").value,   
+        document.getElementById("res_ds").value,
+        document.getElementById("res_td").value,
         document.getElementById("res_ex").value
     );
     let moyBase = (reseau + bd * 1.5) / 2.5;
@@ -95,10 +117,10 @@ function calculer() {
     let cr_base       = creditModule(moyBase, cr_base_total, cr_bd + cr_reseau);
 
     // ── Langue et culture ──
-    let ang     = parseFloat(document.getElementById("ang_ds").value) * 0.2
-                + parseFloat(document.getElementById("ang_ex").value) * 0.8;
-    let gestion = parseFloat(document.getElementById("gest_ds").value) * 0.2
-                + parseFloat(document.getElementById("gest_ex").value) * 0.8;
+    let ang     = parseFloat(String(document.getElementById("ang_ds").value).replace(",", ".")) * 0.2
+                + parseFloat(String(document.getElementById("ang_ex").value).replace(",", ".")) * 0.8;
+    let gestion = parseFloat(String(document.getElementById("gest_ds").value).replace(",", ".")) * 0.2
+                + parseFloat(String(document.getElementById("gest_ex").value).replace(",", ".")) * 0.8;
     ang     = ang     || 0;
     gestion = gestion || 0;
     let moyLangue = (ang + gestion) / 2;
@@ -110,13 +132,13 @@ function calculer() {
 
     // ── UE Optionnelle ──
     let ent = calcMatiere(
-        document.getElementById("ent_ds").value, 
-        document.getElementById("ent_td").value,  
+        document.getElementById("ent_ds").value,
+        document.getElementById("ent_td").value,
         document.getElementById("ent_ex").value
     );
     let sys = calcMatiere(
-        document.getElementById("sys_ds").value,  
-        document.getElementById("sys_td").value,   
+        document.getElementById("sys_ds").value,
+        document.getElementById("sys_td").value,
         document.getElementById("sys_ex").value
     );
     let moyUO = (ent * 1.5 + sys * 1.5) / 3;
@@ -198,7 +220,7 @@ function calculer() {
         { id: "cr_cpoo",        val: cr_cpoo,        max: cr_cpoo_total },
         { id: "cr_probabilite", val: cr_probabilite, max: cr_proba_total },
         { id: "cr_automate",    val: cr_automate,    max: cr_auto_total },
-        { id: "cr_basededonne", val: cr_base,         max: cr_base_total },
+        { id: "cr_basededonne", val: cr_base,        max: cr_base_total },
         { id: "cr_langue",      val: cr_langue,      max: cr_langue_total },
         { id: "cr_uo",          val: cr_uo,          max: cr_uo_total },
     ];
