@@ -126,150 +126,150 @@ button:active { transform: translateY(0); }
     <h1>Calcul Moyenne Semestre</h1>
 
     <div class="table-wrapper">
-    <table>
-        <tr>
-            <th>Module</th>
-            <th>Matière</th>
-            <th>Coefficient</th>
-            <th>TD/TP</th>
-            <th>DS</th>
-            <th>Examen</th>
-            <th>Moyenne</th>
-            <th>Crédit</th>
-            <th>Moyenne Module</th>
-            <th>Crédit Module</th>
-        </tr>
+        <table>
+            <tr>
+                <th>Module</th>
+                <th>Matière</th>
+                <th>Coefficient</th>
+                <th>TD/TP</th>
+                <th>DS</th>
+                <th>Examen</th>
+                <th>Moyenne</th>
+                <th>Crédit</th>
+                <th>Moyenne Module</th>
+                <th>Crédit Module</th>
+            </tr>
 
-        <!-- ── CPOO ── -->
-        <tr class="module">
-            <td rowspan="2">CPOO</td>
-            <td>Conception UML</td>
-            <td>1.5</td>
-            <td><input type="number" id="si_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="si_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="si_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_si">0</td>
-            <td id="cr_si">0</td>
-            <td rowspan="2" id="m_cpoo">0</td>
-            <td rowspan="2" id="cr_cpoo">0</td>
-        </tr>
-        <tr class="module">
-            <td>Java</td>
-            <td>2</td>
-            <td><input type="number" id="java_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="java_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="java_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_java">0</td>
-            <td id="cr_java">0</td>
-        </tr>
+            <!-- ── CPOO ── -->
+            <tr class="module">
+                <td rowspan="2">CPOO</td>
+                <td>Conception UML</td>
+                <td>1.5</td>
+                <td><input type="number" id="si_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="si_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="si_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_si">0</td>
+                <td id="cr_si">0</td>
+                <td rowspan="2" id="m_cpoo">0</td>
+                <td rowspan="2" id="cr_cpoo">0</td>
+            </tr>
+            <tr class="module">
+                <td>Java</td>
+                <td>2</td>
+                <td><input type="number" id="java_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="java_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="java_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_java">0</td>
+                <td id="cr_java">0</td>
+            </tr>
 
-        <!-- ── Probabilité ── -->
-        <tr class="module">
-            <td>Probabilité</td>
-            <td>Probabilité et Statistique</td>
-            <td>2</td>
-            <td><input type="number" id="proba_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="proba_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="proba_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_proba">0</td>
-            <td id="cr_proba">0</td>
-            <td id="m_probabilité">0</td>
-            <td id="cr_probabilite">0</td>
-        </tr>
+            <!-- ── Probabilité ── -->
+            <tr class="module">
+                <td>Probabilité</td>
+                <td>Probabilité et Statistique</td>
+                <td>2</td>
+                <td><input type="number" id="proba_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="proba_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="proba_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_proba">0</td>
+                <td id="cr_proba">0</td>
+                <td id="m_probabilité">0</td>
+                <td id="cr_probabilite">0</td>
+            </tr>
 
-        <!-- ── Automate ── -->
-        <tr class="module">
-            <td rowspan="2">Automate</td>
-            <td>TLA</td>
-            <td>1</td>
-            <td><input type="number" id="tla_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="tla_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="tla_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_tla">0</td>
-            <td id="cr_tla">0</td>
-            <td rowspan="2" id="m_automate">0</td>
-            <td rowspan="2" id="cr_automate">0</td>
-        </tr>
-        <tr class="module">
-            <td>Graphes</td>
-            <td>1</td>
-            <td><input type="number" id="graph_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="graph_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="graph_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_graphe">0</td>
-            <td id="cr_graph">0</td>
-        </tr>
+            <!-- ── Automate ── -->
+            <tr class="module">
+                <td rowspan="2">Automate</td>
+                <td>TLA</td>
+                <td>1</td>
+                <td><input type="number" id="tla_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="tla_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="tla_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_tla">0</td>
+                <td id="cr_tla">0</td>
+                <td rowspan="2" id="m_automate">0</td>
+                <td rowspan="2" id="cr_automate">0</td>
+            </tr>
+            <tr class="module">
+                <td>Graphes</td>
+                <td>1</td>
+                <td><input type="number" id="graph_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="graph_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="graph_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_graphe">0</td>
+                <td id="cr_graph">0</td>
+            </tr>
 
-        <!-- ── Base de données ── -->
-        <tr class="module">
-            <td rowspan="2">Base de données</td>
-            <td>Ingénierie BD</td>
-            <td>1.5</td>
-            <td><input type="number" id="bd_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="bd_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="bd_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_base">0</td>
-            <td id="cr_bd">0</td>
-            <td rowspan="2" id="m_basededonne">0</td>
-            <td rowspan="2" id="cr_basededonne">0</td>
-        </tr>
-        <tr class="module">
-            <td>Réseaux</td>
-            <td>1</td>
-            <td><input type="number" id="res_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="res_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="res_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_reseau">0</td>
-            <td id="cr_reseau">0</td>
-        </tr>
+            <!-- ── Base de données ── -->
+            <tr class="module">
+                <td rowspan="2">Base de données</td>
+                <td>Ingénierie BD</td>
+                <td>1.5</td>
+                <td><input type="number" id="bd_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="bd_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="bd_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_base">0</td>
+                <td id="cr_bd">0</td>
+                <td rowspan="2" id="m_basededonne">0</td>
+                <td rowspan="2" id="cr_basededonne">0</td>
+            </tr>
+            <tr class="module">
+                <td>Réseaux</td>
+                <td>1</td>
+                <td><input type="number" id="res_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="res_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="res_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_reseau">0</td>
+                <td id="cr_reseau">0</td>
+            </tr>
 
-        <!-- ── Langue et culture ── -->
-        <tr class="module">
-            <td rowspan="2">Langue et culture</td>
-            <td>Anglais</td>
-            <td>1</td>
-            <td></td>
-            <td><input type="number" id="ang_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="ang_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_ang">0</td>
-            <td id="cr_ang">0</td>
-            <td rowspan="2" id="m_langue">0</td>
-            <td rowspan="2" id="cr_langue">0</td>
-        </tr>
-        <tr class="module">
-            <td>Gestion</td>
-            <td>1</td>
-            <td></td>
-            <td><input type="number" id="gest_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="gest_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_gestion">0</td>
-            <td id="cr_gestion">0</td>
-        </tr>
+            <!-- ── Langue et culture ── -->
+            <tr class="module">
+                <td rowspan="2">Langue et culture</td>
+                <td>Anglais</td>
+                <td>1</td>
+                <td></td>
+                <td><input type="number" id="ang_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="ang_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_ang">0</td>
+                <td id="cr_ang">0</td>
+                <td rowspan="2" id="m_langue">0</td>
+                <td rowspan="2" id="cr_langue">0</td>
+            </tr>
+            <tr class="module">
+                <td>Gestion</td>
+                <td>1</td>
+                <td></td>
+                <td><input type="number" id="gest_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="gest_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_gestion">0</td>
+                <td id="cr_gestion">0</td>
+            </tr>
 
-        <!-- ── UE Optionnelle ── -->
-        <tr class="module">
-            <td rowspan="2">UE Optionnelle</td>
-            <td>Entreprise System</td>
-            <td>1.5</td>
-            <td><input type="number" id="ent_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="ent_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="ent_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_ent">0</td>
-            <td id="cr_ent">0</td>
-            <td rowspan="2" id="m_uo">0</td>
-            <td rowspan="2" id="cr_uo">0</td>
-        </tr>
-        <tr class="module">
-            <td>System Modeling</td>
-            <td>1.5</td>
-            <td><input type="number" id="sys_td" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="sys_ds" min="0" max="20" step="0.25"></td>
-            <td><input type="number" id="sys_ex" min="0" max="20" step="0.25"></td>
-            <td id="m_sys">0</td>
-            <td id="cr_sys">0</td>
-        </tr>
+            <!-- ── UE Optionnelle ── -->
+            <tr class="module">
+                <td rowspan="2">UE Optionnelle</td>
+                <td>Entreprise System</td>
+                <td>1.5</td>
+                <td><input type="number" id="ent_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="ent_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="ent_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_ent">0</td>
+                <td id="cr_ent">0</td>
+                <td rowspan="2" id="m_uo">0</td>
+                <td rowspan="2" id="cr_uo">0</td>
+            </tr>
+            <tr class="module">
+                <td>System Modeling</td>
+                <td>1.5</td>
+                <td><input type="number" id="sys_td" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="sys_ds" min="0" max="20" step="0.25"></td>
+                <td><input type="number" id="sys_ex" min="0" max="20" step="0.25"></td>
+                <td id="m_sys">0</td>
+                <td id="cr_sys">0</td>
+            </tr>
 
-    </table>
+        </table>
     </div>
 
     <div style="text-align:center;">
