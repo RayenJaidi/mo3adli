@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Exercice 2</title>
+    <style>
+    label {
+        display: inline-block; /* Permet de définir la largeur du label */
+        width: 100px;           /* Largeur fixe pour aligner tous les champs */
+        text-align: right;      /* Alignement du texte du label à droite */
+        margin-right: 10px;     /* Petit espace entre label et champ */
+    }
+    
+    .form-row {
+        margin-bottom: 10px;    /* Espace entre les lignes */
+    }
+</style>
+</head>
+<body>
+    <fieldset></fieldset>
+    <div>
+        <form action="">
+            <label >Civilité:</label>
+            <input type="radio" name="Civilité">Monsieur
+            <input type="radio" name="Civilité">Madame
+            <input type="radio" name="Civilité">Mademoiselle
+
+            <br>
+            <br>
+
+            <label for="name">Nom/Prenom</label>
+            <input type="text" name="name" id="name" >
+
+            <br>
+            <br>
+
+            <label for="adr">Adresse</label>
+            <input type="text" id="adr">
+
+            <br>
+            <br>
+
+            <label for="p" >Pays</label>
+            <select name="pays" id="p">
+                <option value="Tunisie">Tunisie</option>
+                <option value="France">France</option>
+                <option value="Italie">Italie</option>
+            </select>
+
+            <br>
+            <br>
+
+            <label >platforme</label>
+            <input type="checkbox">Windows
+            <input type="checkbox">Mac
+            <input type="checkbox">Unix
+
+            <br>
+            <br>
+
+            <label for="">Application</label>
+            <select name="" id="" size="4" multiple>
+                <option value="">Bureautique</option>
+                <option value="">DAO</option>
+                <option value="">SGBD</option>
+                <option value="">Internet</option>
+                <option value="">Bureautique</option>
+            </select>
+        </form>
+    </div>
+</body>
+</html>
